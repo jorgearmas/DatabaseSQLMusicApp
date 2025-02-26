@@ -1,0 +1,38 @@
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.log
+
+# Configuración de usuario de Visual Studio
+.vs/
+*.suo
+*.user
+*.csproj.user
+
+# Caché de paquetes NuGet
+packages/
+.nuget/
+project.lock.json
+
+# Archivos de depuración
+*.psess
+*.vsp
+*.vspx
+*.pidb
+*.mdb
+*.opendb
+
+# Archivos generados al publicar
+publish/
+app.publish/
+
+# Configuración de usuario de Visual Studio
+.vscode/
+.vs/
+
+# Archivos de Windows innecesarios
+Thumbs.db
+Desktop.in
+
