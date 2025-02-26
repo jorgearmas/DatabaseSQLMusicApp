@@ -21,7 +21,6 @@ namespace DatabaseSQLMusicApp
 
             pictureBox1.Load("https://upload.wikimedia.org/wikipedia/en/4/42/Beatles_-_Abbey_Road.jpg");
         }
-
         private void button2_Click(object sender, EventArgs e)
         {
             AlbumsDAO albumsDAO = new AlbumsDAO();
