@@ -1,4 +1,5 @@
 using System.Net;
+using System.Windows.Forms;
 
 namespace DatabaseSQLMusicApp
 {
@@ -7,6 +8,7 @@ namespace DatabaseSQLMusicApp
         //Instance of BindingSource to bind the data
         BindingSource albumbBindingSource = new BindingSource();
         BindingSource trackBindingSource = new BindingSource();
+        List<Album> albums = new List<Album>();
         public Form1()
         {
             InitializeComponent();
@@ -17,10 +19,11 @@ namespace DatabaseSQLMusicApp
             AlbumsDAO albumsDAO = new AlbumsDAO();
 
             // data in 'getAllAlbums' list is binded to albumbBindingSource
+            albums = albumsDAO.getAllAlbums();
             albumbBindingSource.DataSource = albumsDAO.getAllAlbums();
             dataGridView1.DataSource = albumbBindingSource;
 
-            pictureBox1.Load("https://upload.wikimedia.org/wikipedia/en/4/42/Beatles_-_Abbey_Road.jpg");
+            //pictureBox1.Load("https://upload.wikimedia.org/wikipedia/en/4/42/Beatles_-_Abbey_Road.jpg");
         }
         private void button2_Click(object sender, EventArgs e)
         {
@@ -32,7 +35,7 @@ namespace DatabaseSQLMusicApp
         }
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            AlbumsDAO albumsDAO = new AlbumsDAO();
+
             DataGridView dataGridView = (DataGridView)sender;
             int rowClicked = dataGridView.CurrentRow.Index;
             string imageURL = dataGridView.Rows[rowClicked].Cells[4].Value.ToString();
@@ -47,7 +50,7 @@ namespace DatabaseSQLMusicApp
                     using (var ms = new MemoryStream(imageBytes))
                     {
                         pictureBox1.Image = Image.FromStream(ms);
-                        trackBindingSource.DataSource = albumsDAO.getTracksForAlbums((int)dataGridView.Rows[rowClicked].Cells[0].Value);
+                        trackBindingSource.DataSource = albums[rowClicked].Tracks;
                         dataGridView2.DataSource = trackBindingSource;
                     }
                 }
@@ -94,5 +97,16 @@ namespace DatabaseSQLMusicApp
 
         }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            int rowClicked = dataGridView2.CurrentRow.Index;
+            int trackID = (int) dataGridView2.Rows[rowClicked].Cells[0].Value;
+            
+            AlbumsDAO albumsDAO = new AlbumsDAO();
+            int result =  albumsDAO.deleteTrack(trackID);
+            MessageBox.Show("Result " + result);
+            dataGridView2.DataSource = "";
+            albums = albumsDAO.getAllAlbums();
+        }
     }
 }
