@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using Newtonsoft.Json.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace DatabaseSQLMusicApp
@@ -34,6 +35,8 @@ namespace DatabaseSQLMusicApp
                         ImageURL = reader.GetString(4),
                         Description = reader.GetString(5)
                     };
+
+                    a.Tracks = getTracksForAlbums(a.ID);
                     returnThese.Add(a);
                 }
             }
@@ -133,6 +136,55 @@ namespace DatabaseSQLMusicApp
             connection.Close();
 
             return returnThese;
+        }
+        public List<JObject> getTracksUsingJoin(int albumID)
+        {
+            List<JObject> returnThese = new List<JObject>();
+            MySqlConnection connection = new MySqlConnection(connectionString);
+
+            connection.Open();
+
+            string query = "SELECT tracks.ID AS Track_ID, " +
+                "albums.ALBUM_TITLE, tracks.TRACK_TITLE, " +
+                "tracks.VIDEO_URL, " +
+                "tracks.LYRICS FROM tracks JOIN albums " +
+                "ON albums_ID = albums.ID " +
+                "WHERE albums_ID = @albumid";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@albumid", albumID);
+            using (MySqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    JObject newTrack = new JObject();
+                    for (int i = 0; i < reader.FieldCount; i++)
+                    {
+                        newTrack.Add(reader.GetName(i).ToString(), reader.GetValue(i).ToString());
+                    }
+                    returnThese.Add(newTrack);
+                }
+            }
+
+            connection.Close();
+
+            return returnThese;
+        }
+
+        internal int deleteTrack(int trackID)
+        {
+            MySqlConnection connection = new MySqlConnection(connectionString);
+
+            connection.Open();
+
+            String query = "DELETE FROM tracks " +
+                "WHERE ID = @trackID;";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@trackID", trackID);
+            int result = command.ExecuteNonQuery();
+
+            connection.Close();
+
+            return result;
         }
     }
 }
