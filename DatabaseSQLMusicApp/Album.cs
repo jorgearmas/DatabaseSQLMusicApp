@@ -16,5 +16,6 @@ namespace DatabaseSQLMusicApp
         public string Description { get; set; }
 
         // later make a List<Track>
+        public List<Track> Tracks { get; set; }
     }
 }
