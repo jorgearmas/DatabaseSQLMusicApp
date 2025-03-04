@@ -170,6 +170,7 @@ namespace DatabaseSQLMusicApp
             return returnThese;
         }
 
+        /* --- DELETE DATA --- */
         internal int deleteTrack(int trackID)
         {
             MySqlConnection connection = new MySqlConnection(connectionString);
@@ -185,6 +186,34 @@ namespace DatabaseSQLMusicApp
             connection.Close();
 
             return result;
+        }
+
+        /* --- UPPDATE DATA --- */
+        public int modifyAlbum(Album album)
+        {
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+
+            String query = "UPDATE albums " +
+                "SET " +
+                "ALBUM_TITLE = @album_title," +
+                "ARTIST = @album_artist," +
+                "YEAR = @album_year," +
+                "IMAGE_NAME = @album_image_name," +
+                "DESCRIPTION = @album_description " +
+                "WHERE ID=@id";
+
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@id", album.ID);
+            command.Parameters.AddWithValue("@album_title", album.AlbumName);
+            command.Parameters.AddWithValue("@album_artist", album.ArtistName);
+            command.Parameters.AddWithValue("@album_year", album.Year);
+            command.Parameters.AddWithValue("@album_image_name", album.ImageURL);
+            command.Parameters.AddWithValue("@album_description", album.Description);
+            int updated_rows = command.ExecuteNonQuery();
+
+            connection.Close();
+            return updated_rows;
         }
     }
 }
