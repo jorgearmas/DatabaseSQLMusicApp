@@ -13,5 +13,6 @@ namespace DatabaseSQLMusicApp
         public int Number { get; set; }
         public string VideoURL { get; set; }
         public string Lyrics { get; set; }
+        public int album_ID { get; set; }
     }
 }
