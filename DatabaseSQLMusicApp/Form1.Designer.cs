@@ -48,10 +48,22 @@
             label6 = new Label();
             dataGridView2 = new DataGridView();
             button4 = new Button();
+            groupBox2 = new GroupBox();
+            checkBox1 = new CheckBox();
+            button5 = new Button();
+            txt_trackLyrics = new TextBox();
+            txt_trackVideoURL = new TextBox();
+            txt_trackNumber = new TextBox();
+            txt_trackTitle = new TextBox();
+            label10 = new Label();
+            label9 = new Label();
+            label8 = new Label();
+            label7 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // button1
@@ -70,7 +82,7 @@
             dataGridView1.Location = new Point(386, 68);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(739, 240);
+            dataGridView1.Size = new Size(739, 310);
             dataGridView1.TabIndex = 1;
             dataGridView1.CellClick += dataGridView1_CellClick;
             // 
@@ -96,7 +108,7 @@
             // 
             pictureBox1.Location = new Point(1131, 68);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(184, 224);
+            pictureBox1.Size = new Size(310, 310);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 4;
             pictureBox1.TabStop = false;
@@ -216,7 +228,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(386, 324);
+            label6.Location = new Point(386, 394);
             label6.Name = "label6";
             label6.Size = new Size(49, 20);
             label6.TabIndex = 6;
@@ -226,15 +238,16 @@
             // dataGridView2
             // 
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Location = new Point(386, 356);
+            dataGridView2.Location = new Point(386, 426);
             dataGridView2.Name = "dataGridView2";
             dataGridView2.RowHeadersWidth = 51;
-            dataGridView2.Size = new Size(739, 188);
+            dataGridView2.Size = new Size(622, 188);
             dataGridView2.TabIndex = 7;
+            dataGridView2.CellClick += dataGridView2_CellClick;
             // 
             // button4
             // 
-            button4.Location = new Point(386, 564);
+            button4.Location = new Point(386, 634);
             button4.Name = "button4";
             button4.Size = new Size(180, 29);
             button4.TabIndex = 8;
@@ -242,11 +255,118 @@
             button4.UseVisualStyleBackColor = true;
             button4.Click += button4_Click;
             // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(checkBox1);
+            groupBox2.Controls.Add(button5);
+            groupBox2.Controls.Add(txt_trackLyrics);
+            groupBox2.Controls.Add(txt_trackVideoURL);
+            groupBox2.Controls.Add(txt_trackNumber);
+            groupBox2.Controls.Add(txt_trackTitle);
+            groupBox2.Controls.Add(label10);
+            groupBox2.Controls.Add(label9);
+            groupBox2.Controls.Add(label8);
+            groupBox2.Controls.Add(label7);
+            groupBox2.Font = new Font("Segoe UI Light", 9F);
+            groupBox2.Location = new Point(24, 394);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(329, 236);
+            groupBox2.TabIndex = 9;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Add Track";
+            // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(10, 194);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(54, 24);
+            checkBox1.TabIndex = 9;
+            checkBox1.Text = "Edit";
+            checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
+            // 
+            // button5
+            // 
+            button5.Location = new Point(127, 191);
+            button5.Name = "button5";
+            button5.Size = new Size(155, 29);
+            button5.TabIndex = 8;
+            button5.Text = "Add / Modify";
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
+            // 
+            // txt_trackLyrics
+            // 
+            txt_trackLyrics.Location = new Point(127, 145);
+            txt_trackLyrics.Name = "txt_trackLyrics";
+            txt_trackLyrics.Size = new Size(158, 27);
+            txt_trackLyrics.TabIndex = 7;
+            // 
+            // txt_trackVideoURL
+            // 
+            txt_trackVideoURL.Location = new Point(127, 105);
+            txt_trackVideoURL.Name = "txt_trackVideoURL";
+            txt_trackVideoURL.Size = new Size(157, 27);
+            txt_trackVideoURL.TabIndex = 6;
+            // 
+            // txt_trackNumber
+            // 
+            txt_trackNumber.Location = new Point(127, 65);
+            txt_trackNumber.Name = "txt_trackNumber";
+            txt_trackNumber.Size = new Size(155, 27);
+            txt_trackNumber.TabIndex = 5;
+            // 
+            // txt_trackTitle
+            // 
+            txt_trackTitle.Location = new Point(127, 25);
+            txt_trackTitle.Name = "txt_trackTitle";
+            txt_trackTitle.Size = new Size(156, 27);
+            txt_trackTitle.TabIndex = 4;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(10, 142);
+            label10.Name = "label10";
+            label10.Size = new Size(43, 20);
+            label10.TabIndex = 3;
+            label10.Text = "Lyrics";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(10, 104);
+            label9.Name = "label9";
+            label9.Size = new Size(74, 20);
+            label9.TabIndex = 2;
+            label9.Text = "Video URL";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(10, 66);
+            label8.Name = "label8";
+            label8.Size = new Size(61, 20);
+            label8.TabIndex = 1;
+            label8.Text = "Number";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(10, 28);
+            label7.Name = "label7";
+            label7.Size = new Size(71, 20);
+            label7.TabIndex = 0;
+            label7.Text = "Track Title";
+            label7.Click += label7_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1331, 605);
+            ClientSize = new Size(1452, 672);
+            Controls.Add(groupBox2);
             Controls.Add(button4);
             Controls.Add(dataGridView2);
             Controls.Add(label6);
@@ -263,6 +383,8 @@
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -289,5 +411,16 @@
         private Label label6;
         private DataGridView dataGridView2;
         private Button button4;
+        private GroupBox groupBox2;
+        private Label label7;
+        private Label label10;
+        private Label label9;
+        private Label label8;
+        private Button button5;
+        private TextBox txt_trackLyrics;
+        private TextBox txt_trackVideoURL;
+        private TextBox txt_trackNumber;
+        private TextBox txt_trackTitle;
+        private CheckBox checkBox1;
     }
 }
