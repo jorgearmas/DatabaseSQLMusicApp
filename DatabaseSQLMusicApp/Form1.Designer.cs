@@ -34,6 +34,7 @@
             button2 = new Button();
             pictureBox1 = new PictureBox();
             groupBox1 = new GroupBox();
+            checkBox2 = new CheckBox();
             button3 = new Button();
             txt_description = new TextBox();
             txt_imageURL = new TextBox();
@@ -59,11 +60,13 @@
             label9 = new Label();
             label8 = new Label();
             label7 = new Label();
+            webView21 = new Microsoft.Web.WebView2.WinForms.WebView2();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)webView21).BeginInit();
             SuspendLayout();
             // 
             // button1
@@ -115,6 +118,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(checkBox2);
             groupBox1.Controls.Add(button3);
             groupBox1.Controls.Add(txt_description);
             groupBox1.Controls.Add(txt_imageURL);
@@ -135,13 +139,24 @@
             groupBox1.Text = "Add Album";
             groupBox1.Enter += groupBox1_Enter;
             // 
+            // checkBox2
+            // 
+            checkBox2.AutoSize = true;
+            checkBox2.Location = new Point(12, 239);
+            checkBox2.Name = "checkBox2";
+            checkBox2.Size = new Size(54, 24);
+            checkBox2.TabIndex = 11;
+            checkBox2.Text = "Edit";
+            checkBox2.UseVisualStyleBackColor = true;
+            checkBox2.CheckedChanged += checkBox2_CheckedChanged;
+            // 
             // button3
             // 
             button3.Location = new Point(129, 239);
             button3.Name = "button3";
             button3.Size = new Size(157, 29);
             button3.TabIndex = 10;
-            button3.Text = "Add";
+            button3.Text = "Add / Modify";
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
             // 
@@ -361,11 +376,25 @@
             label7.Text = "Track Title";
             label7.Click += label7_Click;
             // 
+            // webView21
+            // 
+            webView21.AllowExternalDrop = true;
+            webView21.CreationProperties = null;
+            webView21.DefaultBackgroundColor = Color.White;
+            webView21.Location = new Point(1038, 428);
+            webView21.Name = "webView21";
+            webView21.Size = new Size(403, 184);
+            webView21.Source = new Uri("https://www.youtube.com/watch?v=dQw4w9WgXcQ", UriKind.Absolute);
+            webView21.TabIndex = 10;
+            webView21.ZoomFactor = 1D;
+            webView21.Click += webView21_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1452, 672);
+            Controls.Add(webView21);
             Controls.Add(groupBox2);
             Controls.Add(button4);
             Controls.Add(dataGridView2);
@@ -385,6 +414,7 @@
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)webView21).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -422,5 +452,7 @@
         private TextBox txt_trackNumber;
         private TextBox txt_trackTitle;
         private CheckBox checkBox1;
+        private CheckBox checkBox2;
+        private Microsoft.Web.WebView2.WinForms.WebView2 webView21;
     }
 }

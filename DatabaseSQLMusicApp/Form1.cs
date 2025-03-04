@@ -53,6 +53,12 @@ namespace DatabaseSQLMusicApp
         }
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            checkBox2.Checked = false;
+            txt_albumName.Text = "";
+            txt_artist.Text = "";
+            txt_year.Text = "";
+            txt_imageURL.Text = "";
+            txt_description.Text = "";
 
             DataGridView dataGridView = (DataGridView)sender;
             int rowClicked = dataGridView.CurrentRow.Index;
@@ -90,23 +96,50 @@ namespace DatabaseSQLMusicApp
         // depreciate above
         private void button3_Click(object sender, EventArgs e)
         {
-            Album album = new Album()
-            {
-                AlbumName = txt_albumName.Text,
-                ArtistName = txt_artist.Text,
-                Year = Int32.Parse(txt_year.Text),
-                ImageURL = txt_imageURL.Text,
-                Description = txt_description.Text,
-            };
+            int rowClicked = dataGridView1.CurrentRow.Index;
+            int albumID = (int)dataGridView1.Rows[rowClicked].Cells[0].Value;
 
-            AlbumsDAO albumsDAO = new AlbumsDAO();
-            int result = albumsDAO.addOneAlbum(album);
-            txt_albumName.Text = "";
-            txt_artist.Text = "";
-            txt_year.Text = "";
-            txt_imageURL.Text = "";
-            txt_description.Text = "";
-            MessageBox.Show($"{result} new row(s) inserted");
+            if (checkBox2.Checked == true)
+            {
+                Album albumUpdate = new Album()
+                {
+                    ID = albumID,
+                    AlbumName = txt_albumName.Text,
+                    ArtistName = txt_artist.Text,
+                    Year = Int32.Parse(txt_year.Text),
+                    ImageURL = txt_imageURL.Text,
+                    Description = txt_description.Text,
+                };
+
+                AlbumsDAO albumsDAOUpdate = new AlbumsDAO();
+                int resultUpdate = albumsDAOUpdate.modifyAlbum(albumUpdate);
+                txt_albumName.Text = "";
+                txt_artist.Text = "";
+                txt_year.Text = "";
+                txt_imageURL.Text = "";
+                txt_description.Text = "";
+                MessageBox.Show($"{resultUpdate} row(s) updated");
+            }
+            else
+            {
+                Album album = new Album()
+                {
+                    AlbumName = txt_albumName.Text,
+                    ArtistName = txt_artist.Text,
+                    Year = Int32.Parse(txt_year.Text),
+                    ImageURL = txt_imageURL.Text,
+                    Description = txt_description.Text,
+                };
+
+                AlbumsDAO albumsDAO = new AlbumsDAO();
+                int result = albumsDAO.addOneAlbum(album);
+                txt_albumName.Text = "";
+                txt_artist.Text = "";
+                txt_year.Text = "";
+                txt_imageURL.Text = "";
+                txt_description.Text = "";
+                MessageBox.Show($"{result} new row(s) inserted");
+            }
         }
         // depreciate below
         private void label6_Click(object sender, EventArgs e)
@@ -133,7 +166,6 @@ namespace DatabaseSQLMusicApp
         // depreciate above
         private void button5_Click(object sender, EventArgs e)
         {
-
             int rowClicked = dataGridView1.CurrentRow.Index;
             int rowClickedDataGrid2 = dataGridView2.CurrentRow.Index;
             int albumID = (int)dataGridView1.Rows[rowClicked].Cells[0].Value;
@@ -159,7 +191,8 @@ namespace DatabaseSQLMusicApp
                 txt_trackLyrics.Text = "";
                 MessageBox.Show($"{resultUpdate} rows updated in tracks");
             }
-            else {
+            else
+            {
 
                 Track track = new Track()
                 {
@@ -181,14 +214,14 @@ namespace DatabaseSQLMusicApp
         }
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            int rowClickedAlbums = dataGridView1.CurrentRow.Index;
+            //int rowClickedAlbums = dataGridView1.CurrentRow.Index;
 
             int rowClicked = dataGridView2.CurrentRow.Index;
             string track_title = dataGridView2.Rows[rowClicked].Cells[1].Value.ToString();
             string track_number = dataGridView2.Rows[rowClicked].Cells[2].Value.ToString();
             string track_videoURL = dataGridView2.Rows[rowClicked].Cells[3].Value.ToString();
             string track_lyrics = dataGridView2.Rows[rowClicked].Cells[4].Value.ToString();
-            
+
             txt_trackTitle.Text = track_title;
             txt_trackNumber.Text = track_number;
             txt_trackVideoURL.Text = track_videoURL;
@@ -201,8 +234,28 @@ namespace DatabaseSQLMusicApp
             txt_trackTitle.Text = "";
             txt_trackNumber.Text = "";
             txt_trackVideoURL.Text = "";
-            txt_trackLyrics.Text = ""; 
+            txt_trackLyrics.Text = "";
         }
 
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            int rowClicked = dataGridView1.CurrentRow.Index;
+            string album_title = dataGridView1.Rows[rowClicked].Cells[1].Value.ToString();
+            string artist_name = dataGridView1.Rows[rowClicked].Cells[2].Value.ToString();
+            string year = dataGridView1.Rows[rowClicked].Cells[3].Value.ToString();
+            string image_url = dataGridView1.Rows[rowClicked].Cells[4].Value.ToString();
+            string description = dataGridView1.Rows[rowClicked].Cells[5].Value.ToString();
+
+            txt_albumName.Text = album_title;
+            txt_artist.Text = artist_name;
+            txt_year.Text = year;
+            txt_imageURL.Text = image_url;
+            txt_description.Text = description;
+        }
+
+        private void webView21_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
